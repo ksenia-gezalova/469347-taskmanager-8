@@ -2,6 +2,12 @@
 
 const filtersContainer = document.querySelector(`.main__filter`);
 const cardsContainer = document.querySelector(`.board__tasks`);
+const filterInputs = {
+  get() {
+    return filtersContainer.querySelectorAll(`.filter__input`);
+  }
+};
+
 const filters = [{
   caption: `All`,
   amount: `15`,
@@ -408,4 +414,28 @@ Here is a card with filled data</textarea
 // render cards
 cards.forEach((c) => {
   cardsContainer.appendChild(getCardElement(c));
+});
+
+// remove items
+const removeItems = () => {
+  while (cardsContainer.firstChild) {
+    cardsContainer.removeChild(cardsContainer.firstChild);
+  }
+};
+
+// MathRandom
+const getRandomValue = function (min, max) {
+  const random = min + Math.random() * (max + 1 - min);
+  return Math.floor(random);
+};
+
+// listener for all filters
+filterInputs.get().forEach((filter) => {
+  filter.addEventListener(`click`, (evt) => {
+    evt.preventDefault();
+    removeItems();
+    cards.slice(getRandomValue(1, cards.length)).forEach((c) => {
+      cardsContainer.appendChild(getCardElement(c));
+    });
+  });
 });
