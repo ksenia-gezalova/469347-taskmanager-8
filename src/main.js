@@ -2,11 +2,6 @@
 
 const filtersContainer = document.querySelector(`.main__filter`);
 const cardsContainer = document.querySelector(`.board__tasks`);
-const filterInputs = {
-  get() {
-    return filtersContainer.querySelectorAll(`.filter__input`);
-  }
-};
 
 const filters = [
   {
@@ -420,17 +415,16 @@ const removeItems = () => {
 
 // MathRandom
 const getRandomValue = function (min, max) {
-  const random = min + Math.random() * (max + 1 - min);
+  const random = min + Math.random() * (max - min);
   return Math.floor(random);
 };
 
 // listener for all filters
-filterInputs.get().forEach((filter) => {
-  filter.addEventListener(`click`, (evt) => {
-    evt.preventDefault();
+filtersContainer.addEventListener(`change`, (evt) => {
+  if (evt.target.classList.contains(`filter__input`)) {
     removeItems();
-    cards.slice(getRandomValue(1, cards.length)).forEach((c) => {
-      cardsContainer.appendChild(getCardElement(c));
+    cards.slice(getRandomValue(1, cards.length)).forEach((card) => {
+      cardsContainer.appendChild(getCardElement(card));
     });
-  });
+  }
 });
