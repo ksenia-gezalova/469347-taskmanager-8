@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const filtersContainer = document.querySelector(`.main__filter`);
 const cardsContainer = document.querySelector(`.board__tasks`);
@@ -8,109 +8,88 @@ const filterInputs = {
   }
 };
 
-const filters = [{
-  caption: `All`,
-  amount: `15`,
-  isChecked: true,
-},
-{
-  caption: `overdue`,
-  amount: `0`,
-  isDisabled: true
-},
-{
-  caption: `today`,
-  amount: `0`,
-  isDisabled: true
-},
-{
-  caption: `favorites`,
-  amount: `8`
-},
-{
-  caption: `repeating`,
-  amount: `2`
-},
-{
-  caption: `tags`,
-  amount: `6`
-},
-{
-  caption: `archive`,
-  amount: `115`
-}
+const filters = [
+  {
+    caption: `All`,
+    amount: `15`,
+    isChecked: true
+  },
+  {
+    caption: `overdue`,
+    amount: `0`,
+    isDisabled: true
+  },
+  {
+    caption: `today`,
+    amount: `0`,
+    isDisabled: true
+  },
+  {
+    caption: `favorites`,
+    amount: `8`
+  },
+  {
+    caption: `repeating`,
+    amount: `2`
+  },
+  {
+    caption: `tags`,
+    amount: `6`
+  },
+  {
+    caption: `archive`,
+    amount: `115`
+  }
 ];
 
-const cards = [{
-  isEdit: true,
-  color: `black`,
-  type: `repeat`,
-  tags: [
-    `repeat`,
-    `cinema`,
-    `entertaiment`
-  ],
-  photoUrl: `img/sample-img.jpg`,
-  date: `23 September`,
-  time: `11:15 PM`
-},
-{
-  color: `blue`,
-  type: `deadline`,
-  tags: [
-    `repeat`,
-    `cinema`,
-    `entertaiment`
-  ],
-  photoUrl: `img/sample-img.jpg`,
-  date: `23 September`,
-  time: `11:15 PM`
-},
-{
-  color: `pink`,
-  type: `repeat`,
-  tags: [
-    `repeat`,
-    `cinema`,
-    `entertaiment`
-  ]
-},
-{
-  color: `black`,
-  type: `repeat`,
-  tags: [
-    `entertaiment`
-  ],
-  photoUrl: `img/sample-img.jpg`
-},
-{
-  color: `blue`,
-  type: `repeat`,
-  tags: [
-    `cinema`,
-    `entertaiment`
-  ],
-  photoUrl: `img/sample-img.jpg`,
-},
-{
-  color: `yellow`,
-  type: `repeat`,
-  tags: [
-    `repeat`,
-    `cinema`,
-    `entertaiment`
-  ],
-  photoUrl: `img/sample-img.jpg`,
-  date: `23 September`,
-  time: `11:15 PM`
-},
-{
-  color: `blue`,
-  type: `repeat`,
-  tags: [
-    `repeat`
-  ]
-},
+const cards = [
+  {
+    isEdit: true,
+    color: `black`,
+    type: `repeat`,
+    tags: [`repeat`, `cinema`, `entertaiment`],
+    photoUrl: `img/sample-img.jpg`,
+    date: `23 September`,
+    time: `11:15 PM`
+  },
+  {
+    color: `blue`,
+    type: `deadline`,
+    tags: [`repeat`, `cinema`, `entertaiment`],
+    photoUrl: `img/sample-img.jpg`,
+    date: `23 September`,
+    time: `11:15 PM`
+  },
+  {
+    color: `pink`,
+    type: `repeat`,
+    tags: [`repeat`, `cinema`, `entertaiment`]
+  },
+  {
+    color: `black`,
+    type: `repeat`,
+    tags: [`entertaiment`],
+    photoUrl: `img/sample-img.jpg`
+  },
+  {
+    color: `blue`,
+    type: `repeat`,
+    tags: [`cinema`, `entertaiment`],
+    photoUrl: `img/sample-img.jpg`
+  },
+  {
+    color: `yellow`,
+    type: `repeat`,
+    tags: [`repeat`, `cinema`, `entertaiment`],
+    photoUrl: `img/sample-img.jpg`,
+    date: `23 September`,
+    time: `11:15 PM`
+  },
+  {
+    color: `blue`,
+    type: `repeat`,
+    tags: [`repeat`]
+  }
 ];
 
 // create element for one filter
@@ -125,20 +104,24 @@ const getFilterElement = (filter) => {
     ${filter.isChecked ? ` checked` : ``}
     />
     <label for="filter__${filter.caption.toLowerCase()}" class="filter__label"
-      >${filter.caption.toUpperCase()} <span class="filter__${filter.caption.toLowerCase()}-count">${filter.amount}</span></label
+      >${filter.caption.toUpperCase()} <span class="filter__${filter.caption.toLowerCase()}-count">${
+  filter.amount
+}</span></label
     >
   `);
 };
 
 // render filters
-filters.forEach((f) => {
-  filtersContainer.appendChild(getFilterElement(f));
+filters.forEach((filter) => {
+  filtersContainer.appendChild(getFilterElement(filter));
 });
 
 // create element for one card
 const getCardElement = (card) => {
   const cardElement = document.createRange().createContextualFragment(
-      `<article class="card ${card.isEdit ? `card--edit` : ``} card--${card.color.toLowerCase()} card--${card.type.toLowerCase()}">
+      `<article class="card ${
+        card.isEdit ? `card--edit` : ``
+      } card--${card.color.toLowerCase()} card--${card.type.toLowerCase()}">
     <form class="card__form" method="get">
       <div class="card__inner">
         <div class="card__control">
@@ -183,23 +166,31 @@ Here is a card with filled data</textarea
 
               <fieldset class="card__date-deadline">
                 <label class="card__input-deadline-wrap">
-                ${card.date ? `<input
+                ${
+  card.date
+    ? `<input
                     class="card__date"
                     type="text"
                     placeholder="${card.date}"
                     name="date"
                     value="${card.date}"
-                  />` : ``}
+                  />`
+    : ``
+}
 
                 </label>
                 <label class="card__input-deadline-wrap">
-                ${card.time ? `<input
+                ${
+  card.time
+    ? `<input
                     class="card__time"
                     type="text"
                     placeholder="${card.time}"
                     name="time"
                     value="${card.time}"
-                  />` : ``}
+                  />`
+    : ``
+}
 
                 </label>
               </fieldset>
@@ -309,11 +300,15 @@ Here is a card with filled data</textarea
               class="card__img-input visually-hidden"
               name="img"
             />
-            ${card.photoUrl ? `<img
+            ${
+  card.photoUrl
+    ? `<img
               src="${card.photoUrl.toLowerCase()}"
               alt="task picture"
               class="card__img"
-            />` : ``}
+            />`
+    : ``
+}
 
           </label>
 
@@ -412,8 +407,8 @@ Here is a card with filled data</textarea
 };
 
 // render cards
-cards.forEach((c) => {
-  cardsContainer.appendChild(getCardElement(c));
+cards.forEach((card) => {
+  cardsContainer.appendChild(getCardElement(card));
 });
 
 // remove items
