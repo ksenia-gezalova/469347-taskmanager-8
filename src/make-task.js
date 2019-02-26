@@ -34,7 +34,7 @@ const getCardElement = (card) => {
               placeholder="Start typing your text here..."
               name="text"
             >
-Here is a card with filled data</textarea
+              Here is a card with filled data</textarea
             >
           </label>
         </div>
@@ -48,31 +48,24 @@ Here is a card with filled data</textarea
 
               <fieldset class="card__date-deadline">
                 <label class="card__input-deadline-wrap">
-                ${
-  card.date
-    ? `<input
+                ${card.date ? `<input
                     class="card__date"
                     type="text"
                     placeholder="${card.date}"
                     name="date"
                     value="${card.date}"
-                  />`
-    : ``
+                  />` : ``
 }
 
                 </label>
                 <label class="card__input-deadline-wrap">
-                ${
-  card.time
-    ? `<input
+                ${card.time ? `<input
                     class="card__time"
                     type="text"
                     placeholder="${card.time}"
                     name="time"
                     value="${card.time}"
-                  />`
-    : ``
-}
+                  />` : ``}
 
                 </label>
               </fieldset>
@@ -182,15 +175,11 @@ Here is a card with filled data</textarea
               class="card__img-input visually-hidden"
               name="img"
             />
-            ${
-  card.photoUrl
-    ? `<img
+            ${card.photoUrl ? `<img
               src="${card.photoUrl.toLowerCase()}"
               alt="task picture"
               class="card__img"
-            />`
-    : ``
-}
+            />` : ``}
 
           </label>
 
