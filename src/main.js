@@ -38,55 +38,57 @@ const filters = [
   }
 ];
 
-const cards = [
+const card =
   {
-    isEdit: true,
-    color: `black`,
-    type: `repeat`,
-    tags: [`repeat`, `cinema`, `entertaiment`],
-    photoUrl: `img/sample-img.jpg`,
-    date: `23 September`,
-    time: `11:15 PM`
-  },
-  {
-    color: `blue`,
-    type: `deadline`,
-    tags: [`repeat`, `cinema`, `entertaiment`],
-    photoUrl: `img/sample-img.jpg`,
-    date: `23 September`,
-    time: `11:15 PM`
-  },
-  {
-    color: `pink`,
-    type: `repeat`,
-    tags: [`repeat`, `cinema`, `entertaiment`]
-  },
-  {
-    color: `black`,
-    type: `repeat`,
-    tags: [`entertaiment`],
-    photoUrl: `img/sample-img.jpg`
-  },
-  {
-    color: `blue`,
-    type: `repeat`,
-    tags: [`cinema`, `entertaiment`],
-    photoUrl: `img/sample-img.jpg`
-  },
-  {
-    color: `yellow`,
-    type: `repeat`,
-    tags: [`repeat`, `cinema`, `entertaiment`],
-    photoUrl: `img/sample-img.jpg`,
-    date: `23 September`,
-    time: `11:15 PM`
-  },
-  {
-    color: `blue`,
-    type: `repeat`,
-    tags: [`repeat`]
+    title: [
+      `Изучить теорию`,
+      `Сделать домашку`,
+      `Пройти интенсив на соточку`
+    ][Math.floor(Math.random() * 3)],
+    dueDate: Date.now() + 1 + Math.floor(Math.random() * 7) * 24 * 60 * 60 * 1000,
+    tags: new Set([
+      `homework`,
+      `theory`,
+      `practice`,
+      `intensive`,
+      `keks`,
+      `js`,
+      `lecture`
+    ]),
+    picture: `//picsum.photos/100/100?r=${Math.random()}`,
+    color: [
+      `black`,
+      `yellow`,
+      `blue`,
+      `green`,
+      `pink`][Math.floor(Math.random() * 5)],
+    repeatingDays: {
+      'mo': false,
+      'tu': false,
+      'we': Math.random() >= 0.5, // random boolean
+      'th': false,
+      'fr': false,
+      'sa': false,
+      'su': false
+    },
+    isFavorite: Math.random() >= 0.5,
+    isDone: Math.random() >= 0.5,
+    isEdit: false
+  };
+
+const cardsAmount = 7;
+
+// create array of items
+const createItems = (item, amount) => {
+  let items = [];
+  for (let i = 0; i < amount; i++) {
+    items.push(item);
   }
-];
+  return items;
+};
+
+// create array of cards
+const cards = createItems(card, cardsAmount);
 
 // render filters
 filters.forEach((filter) => {
@@ -94,8 +96,8 @@ filters.forEach((filter) => {
 });
 
 // render cards
-cards.forEach((card) => {
-  cardsContainer.appendChild(getCardElement(card));
+cards.forEach((element) => {
+  cardsContainer.appendChild(getCardElement(element));
 });
 
 // remove items
@@ -115,8 +117,8 @@ const getRandomValue = function (min, max) {
 filtersContainer.addEventListener(`change`, (evt) => {
   if (evt.target.classList.contains(`filter__input`)) {
     removeItems();
-    cards.slice(getRandomValue(1, cards.length)).forEach((card) => {
-      cardsContainer.appendChild(getCardElement(card));
+    cards.slice(getRandomValue(1, cards.length)).forEach((element) => {
+      cardsContainer.appendChild(getCardElement(element));
     });
   }
 });

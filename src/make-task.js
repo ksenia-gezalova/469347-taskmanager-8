@@ -1,9 +1,11 @@
 // create element for one card
 const getCardElement = (card) => {
   const cardElement = document.createRange().createContextualFragment(
-      `<article class="card ${
-        card.isEdit ? `card--edit` : ``
-      } card--${card.color.toLowerCase()} card--${card.type.toLowerCase()}">
+      `<article class="card 
+      ${card.isEdit ? `card--edit` : ``} 
+      card--${card.color.toLowerCase()} 
+      ${Object.values(card.repeatingDays).includes(true) ? `card--repeat` : `` }
+      ">
     <form class="card__form" method="get">
       <div class="card__inner">
         <div class="card__control">
@@ -48,23 +50,23 @@ const getCardElement = (card) => {
 
               <fieldset class="card__date-deadline">
                 <label class="card__input-deadline-wrap">
-                ${card.date ? `<input
+                ${card.dueDate ? `<input
                     class="card__date"
                     type="text"
-                    placeholder="${card.date}"
+                    placeholder="${card.dueDate}"
                     name="date"
-                    value="${card.date}"
+                    value="${card.dueDate}"
                   />` : ``
 }
 
                 </label>
                 <label class="card__input-deadline-wrap">
-                ${card.time ? `<input
+                ${card.dueDate ? `<input
                     class="card__time"
                     type="text"
-                    placeholder="${card.time}"
+                    placeholder="${card.dueDate}"
                     name="time"
-                    value="${card.time}"
+                    value="${card.dueDate}"
                   />` : ``}
 
                 </label>
@@ -175,8 +177,8 @@ const getCardElement = (card) => {
               class="card__img-input visually-hidden"
               name="img"
             />
-            ${card.photoUrl ? `<img
-              src="${card.photoUrl.toLowerCase()}"
+            ${card.picture ? `<img
+              src="${card.picture.toLowerCase()}"
               alt="task picture"
               class="card__img"
             />` : ``}
