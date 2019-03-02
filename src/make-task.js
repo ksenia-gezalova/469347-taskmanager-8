@@ -1,21 +1,32 @@
+// format date
+const getFormattedDate = (milliseconds) => {
+  const date = new Date(milliseconds);
+  return `${date.toLocaleString(`en-US`, {day: `2-digit`})} ${date.toLocaleString(`en-US`, {month: `long`})}`;
+};
+
+// format time
+const getFormattedTime = (milliseconds) => `${(new Date(milliseconds)).toLocaleString(`en-US`, {hour12: true, hour: `2-digit`, minute: `2-digit`})}`;
+
 // create element for one card
 const getCardElement = (card) => {
   const cardElement = document.createRange().createContextualFragment(
-      `<article class="card ${
-        card.isEdit ? `card--edit` : ``
-      } card--${card.color.toLowerCase()} card--${card.type.toLowerCase()}">
+      `<article class="card 
+      ${card.isEdit ? `card--edit` : ``} 
+      card--${card.color.toLowerCase()} 
+      ${Object.values(card.repeatingDays).includes(true) ? `card--repeat` : `` }
+      ">
     <form class="card__form" method="get">
       <div class="card__inner">
         <div class="card__control">
           <button type="button" class="card__btn card__btn--edit">
             edit
           </button>
-          <button type="button" class="card__btn card__btn--archive">
+          <button type="button" class="card__btn card__btn--archive ${!card.isDone ? `` : ` card__btn--disabled`}">
             archive
           </button>
           <button
             type="button"
-            class="card__btn card__btn--favorites card__btn--disabled"
+            class="card__btn card__btn--favorites ${card.isFavorite ? `` : ` card__btn--disabled`}"
           >
             favorites
           </button>
@@ -34,7 +45,7 @@ const getCardElement = (card) => {
               placeholder="Start typing your text here..."
               name="text"
             >
-              Here is a card with filled data</textarea
+          Here is a card with filled data</textarea
             >
           </label>
         </div>
@@ -48,23 +59,23 @@ const getCardElement = (card) => {
 
               <fieldset class="card__date-deadline">
                 <label class="card__input-deadline-wrap">
-                ${card.date ? `<input
+                ${card.dueDate ? `<input
                     class="card__date"
                     type="text"
-                    placeholder="${card.date}"
+                    placeholder="${getFormattedDate(card.dueDate)}"
                     name="date"
-                    value="${card.date}"
+                    value=""${getFormattedDate(card.dueDate)}"
                   />` : ``
 }
 
                 </label>
                 <label class="card__input-deadline-wrap">
-                ${card.time ? `<input
+                ${card.dueDate ? `<input
                     class="card__time"
                     type="text"
-                    placeholder="${card.time}"
+                    placeholder="${getFormattedTime(card.dueDate)}"
                     name="time"
-                    value="${card.time}"
+                    value="${getFormattedTime(card.dueDate)}"
                   />` : ``}
 
                 </label>
@@ -175,8 +186,8 @@ const getCardElement = (card) => {
               class="card__img-input visually-hidden"
               name="img"
             />
-            ${card.photoUrl ? `<img
-              src="${card.photoUrl.toLowerCase()}"
+            ${card.picture ? `<img
+              src="${card.picture.toLowerCase()}"
               alt="task picture"
               class="card__img"
             />` : ``}
