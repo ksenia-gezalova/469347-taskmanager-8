@@ -1,6 +1,17 @@
 import getFilterElement from './make-filter.js';
 import getCardElement from './make-task.js';
 
+const CARDS_AMOUNT = 7;
+const HASHTAGS = [
+  `homework`,
+  `theory`,
+  `practice`,
+  `intensive`,
+  `keks`,
+  `js`,
+  `lecture`
+];
+
 const filtersContainer = document.querySelector(`.main__filter`);
 const cardsContainer = document.querySelector(`.board__tasks`);
 
@@ -46,15 +57,7 @@ const card =
       `Пройти интенсив на соточку`
     ][Math.floor(Math.random() * 3)],
     dueDate: Date.now() + 1 + Math.floor(Math.random() * 7) * 24 * 60 * 60 * 1000,
-    tags: new Set([
-      `homework`,
-      `theory`,
-      `practice`,
-      `intensive`,
-      `keks`,
-      `js`,
-      `lecture`
-    ]),
+    tags: new Set(HASHTAGS.sort(() => (Math.random() - 0.5)).slice(0, Math.floor(Math.random() * 3))),
     picture: `//picsum.photos/100/100?r=${Math.random()}`,
     color: [
       `black`,
@@ -76,19 +79,14 @@ const card =
     isEdit: false
   };
 
-const cardsAmount = 7;
 
 // create array of items
 const createItems = (item, amount) => {
-  let items = [];
-  for (let i = 0; i < amount; i++) {
-    items.push(item);
-  }
-  return items;
+  return new Array(amount).fill(item);
 };
 
 // create array of cards
-const cards = createItems(card, cardsAmount);
+const cards = createItems(card, CARDS_AMOUNT);
 
 // render filters
 filters.forEach((filter) => {

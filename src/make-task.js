@@ -1,3 +1,12 @@
+// format date
+const getFormattedDate = (milliseconds) => {
+  const date = new Date(milliseconds);
+  return `${date.toLocaleString(`en-US`, {day: `2-digit`})} ${date.toLocaleString(`en-US`, {month: `long`})}`;
+};
+
+// format time
+const getFormattedTime = (milliseconds) => `${(new Date(milliseconds)).toLocaleString(`en-US`, {hour12: true, hour: `2-digit`, minute: `2-digit`})}`;
+
 // create element for one card
 const getCardElement = (card) => {
   const cardElement = document.createRange().createContextualFragment(
@@ -12,12 +21,12 @@ const getCardElement = (card) => {
           <button type="button" class="card__btn card__btn--edit">
             edit
           </button>
-          <button type="button" class="card__btn card__btn--archive">
+          <button type="button" class="card__btn card__btn--archive ${!card.isDone ? `` : ` card__btn--disabled`}">
             archive
           </button>
           <button
             type="button"
-            class="card__btn card__btn--favorites card__btn--disabled"
+            class="card__btn card__btn--favorites ${card.isFavorite ? `` : ` card__btn--disabled`}"
           >
             favorites
           </button>
@@ -36,7 +45,7 @@ const getCardElement = (card) => {
               placeholder="Start typing your text here..."
               name="text"
             >
-              Here is a card with filled data</textarea
+          Here is a card with filled data</textarea
             >
           </label>
         </div>
@@ -53,9 +62,9 @@ const getCardElement = (card) => {
                 ${card.dueDate ? `<input
                     class="card__date"
                     type="text"
-                    placeholder="${card.dueDate}"
+                    placeholder="${getFormattedDate(card.dueDate)}"
                     name="date"
-                    value="${card.dueDate}"
+                    value=""${getFormattedDate(card.dueDate)}"
                   />` : ``
 }
 
@@ -64,9 +73,9 @@ const getCardElement = (card) => {
                 ${card.dueDate ? `<input
                     class="card__time"
                     type="text"
-                    placeholder="${card.dueDate}"
+                    placeholder="${getFormattedTime(card.dueDate)}"
                     name="time"
-                    value="${card.dueDate}"
+                    value="${getFormattedTime(card.dueDate)}"
                   />` : ``}
 
                 </label>
