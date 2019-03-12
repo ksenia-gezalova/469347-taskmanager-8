@@ -1,4 +1,5 @@
 export const createElement = (template) => {
-  const newElement = document.createRange().createContextualFragment(template);
-  return newElement;
+  const newElement = document.createElement(`div`);
+  newElement.innerHTML = template;
+  return newElement.firstChild;
 };

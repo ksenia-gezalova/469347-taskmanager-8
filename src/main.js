@@ -1,7 +1,7 @@
 import getFilterElement from './make-filter.js';
 
 import {
-  card
+  createCard
 } from './data.js';
 import {
   Task
@@ -14,8 +14,8 @@ const TASKS_AMOUNT = 7;
 
 const filtersContainer = document.querySelector(`.main__filter`);
 const cardsContainer = document.querySelector(`.board__tasks`);
-const taskComponent = new Task(card);
-const editTaskComponent = new TaskEdit(card);
+const taskComponent = new Task(createCard());
+const editTaskComponent = new TaskEdit(createCard());
 
 const filters = [{
   caption: `All`,
