@@ -8,8 +8,9 @@ const HASHTAGS = [
   `lecture`
 ];
 
-export const createCard = () => {
+export const createCard = (id) => {
   return {
+    id,
     title: [
       `Изучить теорию`,
       `Сделать домашку`,

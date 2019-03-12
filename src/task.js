@@ -9,6 +9,7 @@ export class Task {
     this._tags = data.tags;
     this._picture = data.picture;
     this._repeatingDays = data.repeatingDays;
+    this._id = data.id;
 
     this._element = null;
     this._state = {
@@ -26,6 +27,7 @@ export class Task {
   _onEditButtonClick() {
     // eslint-disable-next-line no-unused-expressions
     typeof this._onEdit === `function` && this._onEdit();
+
   }
 
   get element() {
@@ -38,7 +40,7 @@ export class Task {
 
   get template() {
     return `
-    <article class="card card--blue ${this._isRepeated() ? `card--repeat` : ``}">
+    <article data-id="${this._id}" class="card card--blue ${this._isRepeated() ? `card--repeat` : ``}">
       <div class="card__inner">
       <div class="card__control">
         <button type="button" class="card__btn card__btn--edit">edit</button>
@@ -74,8 +76,7 @@ export class Task {
   }
 
   bind() {
-    this._element.querySelector(`.card__btn--edit`)
-      .addEventListener(`click`, this._onEditButtonClick.bind(this));
+    this._element.querySelector(`.card__btn--edit`).addEventListener(`click`, this._onEditButtonClick);
   }
 
   render() {

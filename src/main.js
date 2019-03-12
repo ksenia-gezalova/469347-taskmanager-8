@@ -14,7 +14,7 @@ const TASKS_AMOUNT = 7;
 
 const filtersContainer = document.querySelector(`.main__filter`);
 const cardsContainer = document.querySelector(`.board__tasks`);
-const taskComponent = new Task(createCard());
+
 const editTaskComponent = new TaskEdit(createCard());
 
 const filters = [{
@@ -52,12 +52,16 @@ const filters = [{
 
 
 // create array of items
-const createItems = (item, amount) => {
-  return new Array(amount).fill(item);
+const createItems = (amount) => {
+  let items = [];
+  for (let i = 0; i < amount; i++) {
+    items.push(new Task(createCard(i)));
+  }
+  return items;
 };
 
 // create array of cards
-const cards = createItems(taskComponent, TASKS_AMOUNT);
+const cards = createItems(TASKS_AMOUNT);
 
 // render filters
 filters.forEach((filter) => {
@@ -92,7 +96,7 @@ filtersContainer.addEventListener(`change`, (evt) => {
   }
 });
 
-taskComponent.onEdit = () => {
+/* taskComponent.onEdit = () => {
   editTaskComponent.render();
   cardsContainer.replaceChild(editTaskComponent.element, taskComponent.element);
   taskComponent.unrender();
@@ -103,3 +107,4 @@ editTaskComponent.onSubmit = () => {
   cardsContainer.replaceChild(taskComponent.element, editTaskComponent.element);
   editTaskComponent.unrender();
 };
+ */
