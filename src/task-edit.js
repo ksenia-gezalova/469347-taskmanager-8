@@ -171,7 +171,7 @@ export class TaskEdit {
   }
 
   unbind() {
-    this._element.querySelector(`.card__formt`)
+    this._element.querySelector(`.card__form`)
       .removeEventListener(`click`, this._onSubmitButtonClick);
   }
 }
