@@ -1,22 +1,17 @@
 import {
-  createElement
-} from './create-element';
+  Component
+} from './component';
 
-export class Task {
+export class Task extends Component {
   constructor(data) {
+    super();
     this._title = data.title;
     this._dueDate = data.dueDate;
     this._tags = data.tags;
     this._picture = data.picture;
     this._repeatingDays = data.repeatingDays;
-    this._id = data.id;
-
-    this._element = null;
-    this._state = {
-      // Состояние компонента
-    };
-
     this._onEdit = null;
+
     this._onEditButtonClick = this._onEditButtonClick.bind(this);
   }
 
@@ -28,10 +23,6 @@ export class Task {
     // eslint-disable-next-line no-unused-expressions
     typeof this._onEdit === `function` && this._onEdit();
 
-  }
-
-  get element() {
-    return this._element;
   }
 
   set onEdit(fn) {
@@ -79,19 +70,8 @@ export class Task {
     this._element.querySelector(`.card__btn--edit`).addEventListener(`click`, this._onEditButtonClick);
   }
 
-  render() {
-    this._element = createElement(this.template);
-    this.bind();
-    return this._element;
-  }
-
   unbind() {
     this._element.querySelector(`.card__btn--edit`)
       .removeEventListener(`click`, this._onEditButtonClick);
-  }
-
-  unrender() {
-    this.unbind();
-    this._element = null;
   }
 }
