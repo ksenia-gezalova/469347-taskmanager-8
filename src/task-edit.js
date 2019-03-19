@@ -1,17 +1,17 @@
 import {
-  createElement
-} from './create-element';
+  Component
+} from './component';
 
-export class TaskEdit {
+export class TaskEdit extends Component {
   constructor(data) {
+    super();
     this._title = data.title;
     this._dueDate = data.dueDate;
     this._tags = data.tags;
     this._picture = data.picture;
     this._repeatingDays = data.repeatingDays;
-
-    this._element = null;
     this._onSubmit = null;
+
     this._onSubmitButtonClick = this._onSubmitButtonClick.bind(this);
   }
 
@@ -27,10 +27,6 @@ export class TaskEdit {
 
   set onSubmit(fn) {
     this._onSubmit = fn;
-  }
-
-  get element() {
-    return this._element;
   }
 
   get template() {
@@ -152,17 +148,6 @@ export class TaskEdit {
         </div>
       </form>
     </article>`.trim();
-  }
-
-  render() {
-    this._element = createElement(this.template);
-    this.bind();
-    return this._element;
-  }
-
-  unrender() {
-    this.unbind();
-    this._element = null;
   }
 
   bind() {
