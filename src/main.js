@@ -1,7 +1,7 @@
 import getFilterElement from "./make-filter.js";
 
 import {
-  createCard
+  task
 } from "./data.js";
 import {
   Task
@@ -15,8 +15,8 @@ import {
 const filtersContainer = document.querySelector(`.main__filter`);
 const cardsContainer = document.querySelector(`.board__tasks`);
 
-const taskComponent = new Task(createCard());
-const editTaskComponent = new TaskEdit(createCard());
+const taskComponent = new Task(task);
+const editTaskComponent = new TaskEdit(task);
 
 const filters = [{
   caption: `All`,
@@ -55,7 +55,7 @@ const filters = [{
 /* const createItems = (amount) => {
   let items = [];
   for (let i = 0; i < amount; i++) {
-    items.push(new Task(createCard(i)));
+    items.push(new Task(task(i)));
   }
   return items;
 }; */
@@ -104,7 +104,14 @@ taskComponent.onEdit = () => {
   taskComponent.unrender();
 };
 
-editTaskComponent.onSubmit = () => {
+editTaskComponent.onSubmit = (newObject) => {
+  task.title = newObject.title;
+  task.tags = newObject.tags;
+  task.color = newObject.color;
+  task.repeatingDays = newObject.repeatingDays;
+  task.dueDate = newObject.dueDate;
+
+  taskComponent.update(task);
   taskComponent.render();
   cardsContainer.replaceChild(taskComponent.element, editTaskComponent.element);
   editTaskComponent.unrender();
