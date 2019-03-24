@@ -170,8 +170,7 @@ export class TaskEdit extends Component {
                       <input type="hidden" name="hashtag" value="${tag}" class="card__hashtag-hidden-input" />
                       <button type="button" class="card__hashtag-name">#${tag}</button>
                       <button type="button" class="card__hashtag-delete">delete</button>
-                    </span>`.trim()
-  ))).join(``)}
+                    </span>`.trim()))).join(``)}
                 </div>
     
                 <label>
@@ -241,8 +240,6 @@ export class TaskEdit extends Component {
   unbind() {
     this._element.querySelector(`.card__form`)
       .removeEventListener(`submit`, this._onSubmitButtonClick);
-    this._element.querySelector(`.card__form`)
-      .removeEventListener(`submit`, this._onSubmitButtonClick);
     this._element.querySelector(`.card__date-deadline-toggle`)
       .removeEventListener(`click`, this._onChangeDate);
     this._element.querySelector(`.card__repeat-toggle`)
@@ -263,8 +260,7 @@ export class TaskEdit extends Component {
       text: (value) => target.title = value,
       color: (value) => target.color = value,
       repeat: (value) => target.repeatingDays[value] = true,
-      date: (value) => target.dueDate[value],
-
+      date: (value) => target.dueDate = value
     };
   }
 
